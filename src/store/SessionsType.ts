@@ -8,6 +8,11 @@ export type Session = {
   duration: number;
 };
 
+export type BookedSession = {
+  userName: string;
+  userEmail: string;
+}& Session;
+
 export type SessionState = {
   upcomingSessions: Session[];
 };

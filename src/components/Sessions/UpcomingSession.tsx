@@ -6,6 +6,8 @@ type UpcommingSessionProps={
     title: string;
     summary: string;
     date: string;
+    userName:string;
+    userEmail:string;
   };
   onCancel:()=>void
 };
@@ -15,6 +17,7 @@ export default function UpcomingSession({session,onCancel}: UpcommingSessionProp
     <article className="upcoming-session">
       
       <div>
+        
         <h3>{session.title}</h3>
         <p>{session.summary}</p>
         <time dateTime={new Date(session.date).toISOString()}>
@@ -24,6 +27,12 @@ export default function UpcomingSession({session,onCancel}: UpcommingSessionProp
             year: 'numeric',
           })}
         </time>
+
+      <div className="personalData">
+        <h6>{session.userName}</h6>
+        <h6>{session.userEmail}</h6>
+      </div>
+
       </div>
 
       <p className="actions">
