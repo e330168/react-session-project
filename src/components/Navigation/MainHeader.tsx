@@ -10,7 +10,10 @@ export default function MainHeader(){
          <nav>
             <ul>
                 <li>
-                    <NavLink to="/" className={({isActive})=>isActive ? 'active' : ''}>Our Mission</NavLink>
+                    <NavLink to="/" className={({isActive})=>isActive ? 'active' : ''} end>Our Mission</NavLink>
+                </li>
+                <li>
+                    <NavLink to="/sessions" className={({isActive})=>isActive ? 'active' : ''}>Browse Sessions</NavLink>
                 </li>
             </ul>
          </nav>
