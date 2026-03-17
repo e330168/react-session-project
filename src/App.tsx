@@ -1,12 +1,10 @@
 import './App.css'
+import Home from './pages/Home'
 
-function App() {
-
+export default function App() {
   return (
     <>
-       <h1>Book Session Project</h1>
+       <Home></Home>
     </>
   )
 }
-
-export default App
