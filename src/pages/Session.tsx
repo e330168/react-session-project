@@ -3,6 +3,7 @@ import {SESSIONS} from "../dummy-sessions";
 import Button from "../components/UI/Button";
 import { useState } from "react";
 import BookSession from "../components/Sessions/BookSession";
+import { getDaysDistance } from "../helpers/date";
 
 export default function Session(){
    
@@ -13,22 +14,24 @@ export default function Session(){
 
     const[isBooking, setIsBooking]= useState(false);
 
+    
     if(!loadedSession){
-        return (
-            <main>
+      return (
+        <main>
                 <p>No session found!</p>
             </main>
         )
-    }
-
-    function handleStartBooking(){
-      setIsBooking(true);
-    }
-
-    function handleStopBooking(){
-      setIsBooking(false);
-    }
-
+      }
+      
+      function handleStartBooking(){
+        setIsBooking(true);
+      }
+      
+      function handleStopBooking(){
+        setIsBooking(false);
+      }
+      
+    const diffDays = getDaysDistance(loadedSession.date);
 
     return (
         <main id="session-page">
@@ -53,8 +56,22 @@ export default function Session(){
                             year: 'numeric',
                         })}
                   </time>
+
+                  <div className="text-h3">
+                    {diffDays > 0
+                      ? `Happening in ${diffDays} day(s)`
+                      : diffDays < 0
+                      ? `Happened ${Math.abs(diffDays)} day(s) ago`
+                      : 'Happening today!'}
+                  </div>
+                  {diffDays < 0 && <p className="error">This session has already passed.</p>}
+
                   <p>
-                    <Button onClick={handleStartBooking}>Book Session</Button>
+                    <Button onClick={handleStartBooking}
+                            disabled={diffDays < 0}
+                            className={`button ${diffDays < 0 ? 'button--disabled' : ''}`}
+                            >Book Session
+                    </Button>
                   </p>
                </div>
           </header>

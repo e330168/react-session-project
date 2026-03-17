@@ -17,7 +17,7 @@ export const SESSIONS = [
     description:
       "Starting with React can be daunting.\n\nYet, with the right guidance, it can be an exhilarating journey.\n\nIn this session, we will begin by demystifying React's core philosophy.\n\nWhy was React created?\n\nWhat problems does it solve in the world of web development?\n\nTogether, we'll delve into the virtual DOM, JSX, and component-based architecture.\n\nNo need to worry about the jargon; I'll break everything down step by step.\n\nWe'll touch on the importance of unidirectional data flow and the component lifecycle.\n\nWe'll set up a new React project together.\n\nBy the end of our session, you will have a clear understanding and a roadmap tailored just for you, to aid your React journey.",
     duration: 1,
-    date: '2026-12-01',
+    date: '2026-03-17',
     image: kickstartReact,
   },
   {
@@ -27,7 +27,7 @@ export const SESSIONS = [
     description:
       "Every developer, regardless of experience, encounters bugs.\n\nBut, the power lies in knowing how to squash them effectively.\n\nIn our focused session, you'll learn the art of debugging in React.\n\nWe'll start by understanding the common pitfalls and errors that many developers face.\n\nUsing tools like React DevTools, we'll inspect components, props, and state.\n\nTogether, we'll simulate a few bugs and then debug them in real-time.\n\nYou'll learn about error boundaries and their significance in preventing app crashes.\n\nBy the end, not only will we have tackled your current bug(s), but you'll also be equipped with a toolkit of debugging strategies for future challenges.\n\nRemember, in the world of development, debugging is a superpower.",
     duration: 1.5,
-    date: '2026-12-03',
+    date: '2026-03-31',
     image: debugCode,
   },
   {
@@ -37,7 +37,7 @@ export const SESSIONS = [
     description:
       "Bring your existing components and let's refactor them. Learn the best practices to create scalable and reusable components.",
     duration: 1.5,
-    date: '2026-12-07',
+    date: '2026-03-07',
     image: blueprintComponent,
   },
   {
@@ -47,7 +47,7 @@ export const SESSIONS = [
     description:
       "Discuss your app's state challenges and explore different strategies, from `useState` to `useReducer` or even Redux, to manage state.",
     duration: 2,
-    date: '2026-12-09',
+    date: '2026-07-09',
     image: stateMgmtFlow,
   },
   {
@@ -57,7 +57,7 @@ export const SESSIONS = [
     description:
       "Explore the power of custom hooks. Work together to create hooks tailored for your application's needs.",
     duration: 1.5,
-    date: '2026-12-12',
+    date: '2026-09-12',
     image: hooks,
   },
   {
@@ -67,7 +67,7 @@ export const SESSIONS = [
     description:
       'From CSS modules to styled-components, discuss the pros and cons of different styling approaches in React and implement the best fit for your project.',
     duration: 2,
-    date: '2026-12-15',
+    date: '2026-04-15',
     image: styling,
   },
   {
@@ -77,7 +77,7 @@ export const SESSIONS = [
     description:
       'Walk through integrating APIs, handling asynchronous operations, error handling, and setting up data fetching patterns in your app.',
     duration: 2,
-    date: '2026-12-17',
+    date: '2026-04-17',
     image: dataFetching,
   },
   {
@@ -87,7 +87,7 @@ export const SESSIONS = [
     description:
       'See the benefits of integrating TypeScript into your React projects firsthand. Get guidance on type-checking your components and defining props.',
     duration: 1.5,
-    date: '2026-12-20',
+    date: '2026-09-20',
     image: reactTs,
   },
   {
@@ -97,7 +97,7 @@ export const SESSIONS = [
     description:
       "Audit your React app's performance. From React's Profiler to code splitting, apply techniques to enhance the app's speed and responsiveness.",
     duration: 2,
-    date: '2026-12-23',
+    date: '2026-08-23',
     image: performance,
   },
   {
@@ -107,7 +107,7 @@ export const SESSIONS = [
     description:
       'An in-depth review of your Redux setup. Improve your store, actions, and reducers. Dive into middleware like Redux Thunk for asynchronous actions.',
     duration: 2,
-    date: '2026-12-27',
+    date: '2026-10-27',
     image: dataStore,
   },
 ];

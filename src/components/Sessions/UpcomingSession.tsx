@@ -1,3 +1,4 @@
+import { getDaysDistance } from "../../helpers/date";
 import Button from "../UI/Button";
 
 type UpcommingSessionProps={
@@ -13,11 +14,14 @@ type UpcommingSessionProps={
 };
 
 export default function UpcomingSession({session,onCancel}: UpcommingSessionProps){
+
+const diffDays = getDaysDistance(session.date);
+
   return(
     <article className="upcoming-session">
       
       <div>
-        
+
         <h3>{session.title}</h3>
         <p>{session.summary}</p>
         <time dateTime={new Date(session.date).toISOString()}>
@@ -28,18 +32,26 @@ export default function UpcomingSession({session,onCancel}: UpcommingSessionProp
           })}
         </time>
 
-      <div className="personalData">
-        <h6>{session.userName}</h6>
-        <h6>{session.userEmail}</h6>
-      </div>
+        <p>
+          {diffDays > 0
+            ? `Happening in ${diffDays} day(s)`
+            : diffDays < 0
+            ? `Happened ${Math.abs(diffDays)} day(s) ago`
+            : 'Happening today!'}
+        </p>
 
-      </div>
+        <div className="personalData">
+          <h6>{session.userName}</h6>
+          <h6>{session.userEmail}</h6>
+        </div>
 
-      <p className="actions">
-        <Button textOnly onClick={onCancel}>
-          Cancel
-        </Button>
-      </p>
+        </div>
+
+        <p className="actions">
+          <Button textOnly onClick={onCancel}>
+            Cancel
+          </Button>
+        </p>
       
     </article>
   );

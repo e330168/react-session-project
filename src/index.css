@@ -288,7 +288,6 @@ ul {
 
 .upcoming-session h6 {
   margin: 0;
-  /* color: rgb(150, 150, 150); */
   color:black;
 }
 
@@ -305,7 +304,23 @@ ul {
 }
 
 .error{
-  color:rgb(81, 15, 15);
+  color: rgb(255 130 130);
+}
+
+.text-h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #c7b0ee;
+}
+
+.button--disabled {
+  background-color: #ccc;
+  color: #666;     
+  cursor: not-allowed;
+}
+
+.button--disabled:hover {
+  background-color: #ccc;  
 }
 
 .upcoming-session p {

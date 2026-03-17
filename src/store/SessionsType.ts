@@ -14,7 +14,7 @@ export type BookedSession = {
 }& Session;
 
 export type SessionState = {
-  upcomingSessions: Session[];
+  upcomingSessions: BookedSession[];
 };
 
 export type SessionContextValue = SessionState & {
