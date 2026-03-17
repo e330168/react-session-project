@@ -1,4 +1,4 @@
-import {SESSIONS} from "../dummy-sessions";
+// import {SESSIONS} from "../dummy-sessions";
 
 export default function Sessions(){
     return(

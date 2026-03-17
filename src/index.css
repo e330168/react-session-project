@@ -53,29 +53,47 @@ body {
   color: #d5cbe7;
 }
 
-#sessions-page {
+
+
+#session-page {
   width: 80%;
-  max-width: 80rem;
+  max-width: 60rem;
   margin: 3rem auto;
 }
 
-#sessions-page h2 {
-  margin: 2rem 0 0.5rem 0;
-  font-size: 1.5rem;
-  color: #bba4de;
+#session-page header {
+  display: flex;
+  gap: 1.5rem;
 }
 
-#sessions-page header p {
-  margin: 0;
+#session-page img {
+  width: 30rem;
+  height: 20rem;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+#session-page h2 {
+  margin: 0 0 0.5rem 0;
+  font-size: 2.5rem;
+  color: #e1d8f0;
+}
+
+#session-page time {
   color: #b6adc5;
+  font-size: 1rem;
 }
 
-#sessions-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
-  gap: 3rem;
-  border-radius: 6px;
-  margin: 1rem 0;
+#session-page #content {
+  max-width: 60rem;
+  margin: 2rem auto;
   padding: 1rem;
   background-color: #5a5563;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  color: #e1d8f0;
+  font-size: 1.25rem;
+  white-space: pre-wrap;
+  animation: fade-slide-down 0.3s ease-out forwards;
 }
