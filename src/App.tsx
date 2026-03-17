@@ -1,10 +1,24 @@
-import './App.css'
-import Home from './pages/Home'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import './App.css';
+import Root from './pages/Root';
+import HomePage from './pages/Home';
 
-export default function App() {
-  return (
-    <>
-       <Home></Home>
-    </>
-  )
+const Router= createBrowserRouter([
+    {
+      path:'/',
+      element:<Root/>,
+      children:[
+          {
+            index: true,
+            element: <HomePage/>
+          }
+      ],
+    }
+]);
+
+
+function App(){
+  return <RouterProvider router={Router} />
 }
+
+export default App;

@@ -53,6 +53,38 @@ body {
   color: #d5cbe7;
 }
 
+#main-header {
+  width: 80%;
+  max-width: 80rem;
+  margin: 2rem auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#main-header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #cebfe7;
+}
+
+#main-header nav ul {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+#main-header a {
+  text-decoration: none;
+  color: #c6a8f5;
+  padding: 0.25rem 0;
+  border-bottom: 2px solid transparent;
+}
+
+#main-header a:hover,
+#main-header a:active,
+#main-header a.active {
+  border-color: #c6a8f5;
 
 
 #session-page {
