@@ -3,6 +3,7 @@ import './App.css';
 import Root from './pages/Root';
 import HomePage from './pages/Home';
 import SessionsPage from './pages/Sessions';
+import SessionListPage from './pages/Session';
 
 const Router= createBrowserRouter([
     {
@@ -13,7 +14,8 @@ const Router= createBrowserRouter([
             index: true,
             element: <HomePage/>
           },
-        {path:'sessions', element:<SessionsPage/>}
+        {path:'sessions', element:<SessionsPage/>},
+        {path:'sessions/:id', element:<SessionListPage/>}
       ],
     }
 ]);

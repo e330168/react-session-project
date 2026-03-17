@@ -1,3 +1,5 @@
+import SessionItem from "./SessionItem";
+
 export type SessionListProps={
     sessions: {
         id: string;
@@ -15,7 +17,7 @@ return (
        <ul id="sessions-list">
           {sessions.map((session)=>(
             <li key={session.id}>
-                   {/* <SessionItem {...session} /> */}
+                   <SessionItem {...session} />
             </li>
           ))}
        </ul>
