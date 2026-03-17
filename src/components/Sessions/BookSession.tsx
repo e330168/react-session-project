@@ -1,17 +1,10 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type FormEvent } from "react";
 import type { ModalHandle } from "../UI/Modal";
 import Modal from "../UI/Modal";
 import Button from "../UI/Button";
-
-export type Session = {
-  id: string;
-  title: string;
-  summary: string;
-  description: string;
-  date: string;
-  image: string;
-  duration: number;
-};
+import type { Session } from "../../store/SessionsType";
+import { useSessionsContext } from "../../store/useSessionsContext";
+import Input from "../UI/Input";
 
 type BookSessionProps={
   session: Session;
@@ -21,6 +14,7 @@ type BookSessionProps={
 export default function BookSession({session,onDone}: BookSessionProps){
 
     const modal= useRef<ModalHandle>(null);
+    const sessionsCtx= useSessionsContext();
 
     useEffect(()=>{
         if(modal.current){
@@ -28,22 +22,38 @@ export default function BookSession({session,onDone}: BookSessionProps){
         }
     },[]);
 
+
+    function handleSubmit(event: FormEvent<HTMLFormElement>){
+      event.preventDefault();
+
+      const formData= new FormData(event.currentTarget);
+      const data=Object.fromEntries(formData);
+
+      console.log(data);
+
+      sessionsCtx.bookSession(session);
+
+      console.log("Upcoming sessions after booking:", sessionsCtx.upcomingSessions);
+      onDone();
+    }
+
     return(
      <Modal ref={modal} onClose={onDone}>
-         
          <h2>Book Session</h2>
-          
-            <form>
+  
+            <form onSubmit={handleSubmit}>
               
+                  <Input label="Your name" id="name" name="name" type="text" />
+                  <Input label="Your email" id="email" name="email" type="email" />
+
                  <p className="actions">
                       <Button type="button" textOnly onClick={onDone}>
                         Cancel
                       </Button>
                       <Button>Book Session</Button>
                  </p>
-                 
             </form>
-        
+
      </Modal>
     )
 }
