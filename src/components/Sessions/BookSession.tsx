@@ -1,4 +1,4 @@
-import { useEffect, useRef, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import type { ModalHandle } from "../UI/Modal";
 import Modal from "../UI/Modal";
 import Button from "../UI/Button";
@@ -22,10 +22,10 @@ export default function BookSession({session,onDone}: BookSessionProps){
         }
     },[]);
 
+    const [errors, setErrors] = useState<{name?: string; email?: string}>({});
 
-    function handleSubmit(event: FormEvent<HTMLFormElement>){
+    function handleSubmit(event: FormEvent<HTMLFormElement>) {
       event.preventDefault();
-
       const formData= new FormData(event.currentTarget);
       const data=Object.fromEntries(formData);
 
@@ -37,9 +37,23 @@ export default function BookSession({session,onDone}: BookSessionProps){
         ...session
       };
 
-      sessionsCtx.bookSession(bookSession);
+      const newErrors: typeof errors = {};
 
-      console.log("Upcoming sessions after booking:", sessionsCtx.upcomingSessions);
+      if (!bookSession.userName || bookSession.userName.length < 2) {
+        newErrors.name = "Name must be at least 2 characters";
+      }
+
+      if (!bookSession.userEmail || !/^[\w.-]+@[a-z0-9.-]+\.[a-z]{2,}$/i.test(bookSession.userEmail)) {
+        newErrors.email = "Please enter a valid email";
+      }
+
+      if (Object.keys(newErrors).length > 0) {
+        setErrors(newErrors);
+        return;
+      }
+
+      setErrors({});
+      sessionsCtx.bookSession(bookSession);
       onDone();
     }
 
@@ -49,8 +63,11 @@ export default function BookSession({session,onDone}: BookSessionProps){
   
             <form onSubmit={handleSubmit}>
               
-                  <Input label="Your name" id="name" name="name" type="text" />
-                  <Input label="Your email" id="email" name="email" type="email" />
+                <Input label="Your name" id="name" name="name" type="text"/>
+                {errors.name && <p className="error">{errors.name}</p>}
+
+                <Input label="Your email" id="email" name="email" type="email"/>
+                {errors.email && <p className="error">{errors.email}</p>}
 
                  <p className="actions">
                       <Button type="button" textOnly onClick={onDone}>
@@ -58,8 +75,54 @@ export default function BookSession({session,onDone}: BookSessionProps){
                       </Button>
                       <Button>Book Session</Button>
                  </p>
+
             </form>
 
      </Modal>
     )
 }
+
+
+
+
+
+
+
+
+
+    // function handleSubmit(event: FormEvent<HTMLFormElement>){
+    //   event.preventDefault();
+
+    //   const formData= new FormData(event.currentTarget);
+    //   const data=Object.fromEntries(formData);
+
+    //   console.log(data);
+
+    //   const bookSession: BookedSession= {
+    //     userName:data.name as string,
+    //     userEmail:data.email as string,
+    //     ...session
+    //   };
+
+    //   sessionsCtx.bookSession(bookSession);
+
+    //   console.log("Upcoming sessions after booking:", sessionsCtx.upcomingSessions);
+    //   onDone();
+    // }
+    
+
+          {/* <Input label="Your name"
+                      id="name"
+                      name="name" 
+                      type="text" 
+                      minLength={2} 
+                      pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" 
+                      required />
+
+              <Input label="Your email" 
+                      id="email" 
+                      name="email" 
+                      type="email" 
+                      pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" 
+                      title="Please enter a valid email" 
+                      required/> */}
