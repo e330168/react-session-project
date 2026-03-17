@@ -1,5 +1,8 @@
 import { useParams } from "react-router-dom";
 import {SESSIONS} from "../dummy-sessions";
+import Button from "../components/UI/Button";
+import { useState } from "react";
+import BookSession from "../components/Sessions/BookSession";
 
 export default function Session(){
    
@@ -8,6 +11,8 @@ export default function Session(){
     const sessionId= params.id;
     const loadedSession= SESSIONS.find((session)=> session.id ===sessionId);
 
+    const[isBooking, setIsBooking]= useState(false);
+
     if(!loadedSession){
         return (
             <main>
@@ -15,9 +20,23 @@ export default function Session(){
             </main>
         )
     }
-   
+
+    function handleStartBooking(){
+      setIsBooking(true);
+    }
+
+    function handleStopBooking(){
+      setIsBooking(false);
+    }
+
+
     return (
         <main id="session-page">
+
+        {isBooking && 
+           <BookSession session={loadedSession} onDone={handleStopBooking}/>
+        }
+
          <article>
           <header>
               <img  
@@ -34,8 +53,10 @@ export default function Session(){
                             year: 'numeric',
                         })}
                   </time>
+                  <p>
+                    <Button onClick={handleStartBooking}>Book Session</Button>
+                  </p>
                </div>
-             {/* Book Session button*/}
           </header>
           <p id="content">{loadedSession.description}</p>
          </article>
