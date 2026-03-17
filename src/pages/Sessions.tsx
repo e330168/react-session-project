@@ -1,4 +1,5 @@
-// import {SESSIONS} from "../dummy-sessions";
+import SessionsList from "../components/Sessions/SessionsList";
+import {SESSIONS} from "../dummy-sessions";
 
 export default function Sessions(){
     return(
@@ -11,7 +12,7 @@ export default function Sessions(){
                         you!
                      </p>
             </header>
-                {/* <SessionsList sessions={SESSIONS}/> */}
+                <SessionsList sessions={SESSIONS}/>
         </main>
     )
 }
