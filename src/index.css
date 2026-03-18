@@ -313,6 +313,20 @@ ul {
   color: #c7b0ee;
 }
 
+#search{
+ display: flex;
+}
+
+.item {
+  margin-left: auto;
+}
+
+#searchI{
+  width: 1em;
+  height: 1em;
+  object-fit: contain;
+}
+
 .button--disabled {
   background-color: #ccc;
   color: #666;     
