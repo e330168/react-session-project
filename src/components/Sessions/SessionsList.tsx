@@ -2,6 +2,8 @@ import {useMemo, useState } from "react";
 import SessionItem from "./SessionItem";
 import { searchSessions } from "../../helpers/search";
 import { months } from "../../helpers/constants";
+import { sessionDateStatus } from "../../helpers/constants";
+import { getDaysDistance } from "../../helpers/date";
 
 export type SessionListProps={
     sessions: {
@@ -19,6 +21,7 @@ export default function SessionList({sessions}:SessionListProps){
 
 const [query, setQuery] = useState('');
 const [selectedMonth, setSelectedMonth] = useState<string>("");
+const [selectedStatusFilter, setStatusFiler] = useState('');
 
 
   function handleClear() {
@@ -38,8 +41,20 @@ const [selectedMonth, setSelectedMonth] = useState<string>("");
             );
         }
 
+        if (selectedStatusFilter === "active") {
+            result = result.filter(
+            (session) => getDaysDistance(session.date) >= 0
+            );
+        }
+
+        if (selectedStatusFilter === "expired") {
+            result = result.filter(
+            (session) => getDaysDistance(session.date) < 0
+            );
+        }
+
         return result;
-  }, [sessions, query, selectedMonth]);
+  }, [sessions, query, selectedMonth,selectedStatusFilter]);
 
 return (
         <>
@@ -49,11 +64,24 @@ return (
             <select
             value={selectedMonth}
             onChange={(e) => setSelectedMonth(e.target.value)}
-            className="month-dropdown"
+            className="dropdown"
             >
                 {months.map((month) => (
                 <option key={month.value} value={month.value}>
                         {month.label}
+                </option>
+                ))}
+
+            </select>
+
+            <select
+            value={selectedStatusFilter}
+            onChange={(e) => setStatusFiler(e.target.value)}
+            className="dropdown"
+            >
+                {sessionDateStatus.map((status) => (
+                <option key={status.value} value={status.value}>
+                        {status.label}
                 </option>
                 ))}
 

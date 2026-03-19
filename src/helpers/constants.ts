@@ -13,3 +13,9 @@ export const months = [
   { value: "10", label: "November" },
   { value: "11", label: "December" },
 ];
+
+export const sessionDateStatus = [
+  { value: "", label: "All sessions" },
+  { value: "active", label: "Active" },
+  { value: "expired", label: "Expired" },
+];
