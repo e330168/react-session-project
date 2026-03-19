@@ -51,16 +51,6 @@ export const SESSIONS = [
     image: stateMgmtFlow,
   },
   {
-    id: 'sess12',
-    title: 'Custom Hooks Creation',
-    summary: 'Craft your custom hooks.',
-    description:
-      "Explore the power of custom hooks. Work together to create hooks tailored for your application's needs.",
-    duration: 1.5,
-    date: '2026-09-12',
-    image: hooks,
-  },
-  {
     id: 'sess06',
     title: 'Styling Strategies in React',
     summary: 'Discuss and implement styling solutions.',
@@ -109,5 +99,65 @@ export const SESSIONS = [
     duration: 2,
     date: '2026-10-27',
     image: dataStore,
+  },
+   {
+    id: 'sess11',
+    title: 'Kickstart with React: Personal Intro',
+    summary: 'Tailored guidance for total beginners in React.',
+    description:
+      "Starting with React can be daunting.\n\nYet, with the right guidance, it can be an exhilarating journey.\n\nIn this session, we will begin by demystifying React's core philosophy.\n\nWhy was React created?\n\nWhat problems does it solve in the world of web development?\n\nTogether, we'll delve into the virtual DOM, JSX, and component-based architecture.\n\nNo need to worry about the jargon; I'll break everything down step by step.\n\nWe'll touch on the importance of unidirectional data flow and the component lifecycle.\n\nWe'll set up a new React project together.\n\nBy the end of our session, you will have a clear understanding and a roadmap tailored just for you, to aid your React journey.",
+    duration: 1,
+    date: '2027-01-23',
+    image: kickstartReact,
+  },
+  {
+    id: 'sess12',
+    title: 'Debugging Your React Code',
+    summary: "Stuck with a React bug? Let's squash it together.",
+    description:
+      "Every developer, regardless of experience, encounters bugs.\n\nBut, the power lies in knowing how to squash them effectively.\n\nIn our focused session, you'll learn the art of debugging in React.\n\nWe'll start by understanding the common pitfalls and errors that many developers face.\n\nUsing tools like React DevTools, we'll inspect components, props, and state.\n\nTogether, we'll simulate a few bugs and then debug them in real-time.\n\nYou'll learn about error boundaries and their significance in preventing app crashes.\n\nBy the end, not only will we have tackled your current bug(s), but you'll also be equipped with a toolkit of debugging strategies for future challenges.\n\nRemember, in the world of development, debugging is a superpower.",
+    duration: 1.5,
+    date: '2026-02-10',
+    image: debugCode,
+  },
+  {
+    id: 'sess13',
+    title: 'React Component Best Practices',
+    summary: 'Optimize and refactor your components.',
+    description:
+      "Bring your existing components and let's refactor them. Learn the best practices to create scalable and reusable components.",
+    duration: 1.5,
+    date: '2026-05-01',
+    image: blueprintComponent,
+  },
+  {
+    id: 'sess14',
+    title: 'Effective State Management Tactics',
+    summary: 'Strategies to manage state efficiently.',
+    description:
+      "Discuss your app's state challenges and explore different strategies, from `useState` to `useReducer` or even Redux, to manage state.",
+    duration: 2,
+    date: '2026-06-26',
+    image: stateMgmtFlow,
+  },
+  {
+    id: 'sess15',
+    title: 'Custom Hooks Creation',
+    summary: 'Craft your custom hooks.',
+    description:
+      "Explore the power of custom hooks. Work together to create hooks tailored for your application's needs.",
+    duration: 1.5,
+    date: '2026-11-28',
+    image: hooks,
+  },
+  {
+    id: 'sess16',
+    title: 'Styling Strategies in React',
+    summary: 'Discuss and implement styling solutions.',
+    description:
+      'From CSS modules to styled-components, discuss the pros and cons of different styling approaches in React and implement the best fit for your project.',
+    duration: 2,
+    date: '2026-12-31',
+    image: styling,
   },
 ];
