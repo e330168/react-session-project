@@ -6,6 +6,7 @@ export type Session = {
   date: string;
   image: string;
   duration: number;
+  price?: number;
 };
 
 export type BookedSession = {
