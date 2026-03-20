@@ -1,11 +1,14 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import UpcomingSessions from "../Sessions/UpcomingSessions";
 import Button from "../UI/Button";
+import { useAuth } from "../../context/useAuth";
 
 export default function MainHeader(){
 
     const [upcomingSessionsVisible, setUpcomingSessionsVisible]= useState(false);
+    const logout= useAuth();
+    const navigate= useNavigate();
 
     function showUpcomingSessions(){
       setUpcomingSessionsVisible(true);
@@ -14,6 +17,11 @@ export default function MainHeader(){
     function hideUpcomingSessions(){
       setUpcomingSessionsVisible(false);
     }
+
+    const handleLogout=()=>{
+    //   logout();
+      navigate("/");
+    };
 
     return(
         <>
@@ -31,14 +39,19 @@ export default function MainHeader(){
          <nav>
             <ul>
                 <li>
-                    <NavLink to="/" className={({isActive})=>isActive ? 'active' : ''} end>Our Mission</NavLink>
+                    <NavLink to={"/"} className={({isActive})=>isActive ? 'active' : ''} end>Our Mission</NavLink>
                 </li>
                 <li>
-                    <NavLink to="/sessions" className={({isActive})=>isActive ? 'active' : ''}>Browse Sessions</NavLink>
+                    <NavLink to={"/sessions"} className={({isActive})=>isActive ? 'active' : ''}>Browse Sessions</NavLink>
                 </li>
-                <li>
+           
                     <Button onClick={showUpcomingSessions}>Upcoming Sessions</Button>
+
+                <li>
+                    <NavLink to={"/login"} className={({isActive})=>isActive ? 'active' : ''}>Login</NavLink>
                 </li>
+
+                    <Button onClick={handleLogout}>Logout</Button>
             </ul>
          </nav>
 

@@ -4,6 +4,7 @@ import Root from './pages/Root';
 import HomePage from './pages/Home';
 import SessionsPage from './pages/Sessions';
 import SessionListPage from './pages/Session';
+import Login from './components/Navigation/__auth/login';
 
 const Router= createBrowserRouter([
     {
@@ -15,7 +16,8 @@ const Router= createBrowserRouter([
             element: <HomePage/>
           },
         {path:'sessions', element:<SessionsPage/>},
-        {path:'sessions/:id', element:<SessionListPage/>}
+        {path:'sessions/:id', element:<SessionListPage/>},
+        {path:'login', element:<Login/>},
       ],
     }
 ]);
