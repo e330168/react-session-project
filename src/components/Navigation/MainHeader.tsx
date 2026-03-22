@@ -7,7 +7,7 @@ import { useAuth } from "../../context/useAuth";
 export default function MainHeader(){
 
     const [upcomingSessionsVisible, setUpcomingSessionsVisible]= useState(false);
-    const logout= useAuth();
+    const {logout}= useAuth();
     const navigate= useNavigate();
 
     function showUpcomingSessions(){
@@ -19,7 +19,7 @@ export default function MainHeader(){
     }
 
     const handleLogout=()=>{
-    //   logout();
+      logout();
       navigate("/");
     };
 

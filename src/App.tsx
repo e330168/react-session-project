@@ -4,7 +4,7 @@ import Root from './pages/Root';
 import HomePage from './pages/Home';
 import SessionsPage from './pages/Sessions';
 import SessionListPage from './pages/Session';
-import Login from './components/Navigation/__auth/login';
+import Login from './components/Navigation/__auth/Login';
 
 const Router= createBrowserRouter([
     {

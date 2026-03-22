@@ -10,11 +10,27 @@ export const login= async(
     password:string
 ): Promise<User| null> =>{
   try {
+    // const response= await axios.get<User[]>
+    //                      (`${API_URL}/users`,
+    //                        {params: {username,password}}
+    // );
+
     const response= await axios.get<User[]>
-                         (`${API_URL}/users`,
-                           {params: {username,password}}
+                         (`${API_URL}/users`
     );
-        return response.data[0] || null;
+
+    console.log("ALL USERS:", response.data);
+
+    const user = response.data.find(
+      (u) =>
+        u.username === username &&
+        u.password === password
+    );
+
+    console.log("FOUND USER:", user);
+    // console.log(response.data.find(u => u.username === "admin"));
+
+    return user || null;
   } catch (error) {
     console.log("Login failes: ",error);
     return null;
