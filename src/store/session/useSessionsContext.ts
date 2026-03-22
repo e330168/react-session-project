@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-import { SessionsContext } from './SessionsContext';
 import type { SessionContextValue } from './SessionsType';
+import { SessionsContext } from './SessionsContext';
 
 export function useSessionsContext(): SessionContextValue {
   const context = useContext(SessionsContext);

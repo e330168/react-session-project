@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import MainHeader from '../components/Navigation/MainHeader';
-import SessionsContextProvider from '../store/SessionsContextProvider';
 import { AuthProvider } from '../context/AuthProvider';
+import SessionsContextProvider from '../store/session/SessionsContextProvider';
 
 export default function Root() {
   return (

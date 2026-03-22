@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import type { ModalHandle } from "../UI/Modal";
-import { useSessionsContext } from "../../store/useSessionsContext";
+import { useSessionsContext } from "../../store/session/useSessionsContext";
 import Modal from "../UI/Modal";
 import Button from "../UI/Button";
 import UpcommingSession from "./UpcomingSession";

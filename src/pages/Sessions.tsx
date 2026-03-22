@@ -2,7 +2,7 @@ import { useLoaderData} from "react-router-dom";
 import SessionsList from "../components/Sessions/SessionsList";
 import { useAuth } from "../context/useAuth";
 import {images} from "../helpers/images.ts";
-import type { Session } from "../store/SessionsType.ts";
+import type { Session } from "../store/session/SessionsType.ts";
 
 export type ImageKey = keyof typeof images;
 export default function Sessions(){

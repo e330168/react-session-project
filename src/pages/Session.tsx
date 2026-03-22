@@ -1,5 +1,4 @@
 import { useLoaderData, useNavigate} from "react-router-dom";
-import type { Session } from "../store/SessionsType";
 import Button from "../components/UI/Button";
 import { useState } from "react";
 import BookSession from "../components/Sessions/BookSession";
@@ -8,6 +7,7 @@ import { useAuth } from "../context/useAuth.ts";
 import { PERMISSIONS } from "../helpers/roles.ts";
 import { deleteSessions } from "../api/index.ts";
 import {images} from "../helpers/images.ts";
+import type { Session } from "../store/session/SessionsType.ts";
 
 export default function Session(){
    

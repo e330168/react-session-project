@@ -2,9 +2,9 @@ import { useEffect, useRef, useState, type FormEvent } from "react";
 import type { ModalHandle } from "../UI/Modal";
 import Modal from "../UI/Modal";
 import Button from "../UI/Button";
-import type { BookedSession, Session } from "../../store/SessionsType";
-import { useSessionsContext } from "../../store/useSessionsContext";
+import { useSessionsContext } from "../../store/session/useSessionsContext";
 import Input from "../UI/Input";
+import type { BookedSession, Session } from "../../store/session/SessionsType";
 
 type BookSessionProps={
   session: Session;
@@ -53,7 +53,7 @@ export default function BookSession({session,onDone}: BookSessionProps){
       }
 
       setErrors({});
-      sessionsCtx.bookSession(bookSession);
+      sessionsCtx.bookSession(bookSession,bookSession.userName,bookSession.userEmail,);
       onDone();
     }
 

@@ -1,4 +1,4 @@
-import type { ImageKey } from "../pages/Sessions";
+import type { ImageKey } from "../../pages/Sessions";
 
 export type Session = {
   id: string;
@@ -11,16 +11,21 @@ export type Session = {
   price?: number;
 };
 
-export type BookedSession = {
+export type BookedSession = Session & {
   userName: string;
   userEmail: string;
-}& Session;
+};
 
 export type SessionState = {
   upcomingSessions: BookedSession[];
 };
 
-export type SessionContextValue = SessionState & {
-  bookSession: (session: Session) => void;
+export type SessionContextValue = {
+  upcomingSessions: BookedSession[];
+  bookSession: (
+    session: Session,
+    userName: string,
+    userEmail: string
+  ) => void;
   cancelSession: (sessionId: string) => void;
 };
