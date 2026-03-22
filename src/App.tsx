@@ -8,6 +8,7 @@ import Login from './components/Navigation/__auth/Login';
 import Unauthorized from './components/Navigation/__auth/Unauthorized';
 import ProtectedRoutes from './components/Navigation/ProtectedRoutes';
 import { PERMISSIONS } from './helpers/roles';
+import { getSessionById, getSessions } from './api';
 
 const Router= createBrowserRouter([
     {
@@ -22,12 +23,19 @@ const Router= createBrowserRouter([
         {path:'unauthorized', element:<Unauthorized/>},
 
         {
-          element: <ProtectedRoutes permissions={[PERMISSIONS.VIEW_SESSIONS,PERMISSIONS.EDIT_SESSION]} />,
+          element: <ProtectedRoutes permissions={[PERMISSIONS.VIEW_SESSIONS]}/>,
             children: [
-              {path:'sessions', element:<SessionsPage/>},
-              {path:'sessions/:id', element:<SessionListPage/>},
+              {path:'sessions', element:<SessionsPage/>,loader: () => getSessions()},
           ]
-        }
+        },
+
+        {
+          element: <ProtectedRoutes permissions={[PERMISSIONS.EDIT_SESSION,PERMISSIONS.DELETE_SESSION]}/>,
+            children: [
+              {path:'sessions/:id', element:<SessionListPage/>,loader: ({params}) => getSessionById(params.id!)},
+          ]
+        },
+        
       ],
     }
 ]);
