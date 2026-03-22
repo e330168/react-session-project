@@ -7,7 +7,7 @@ import { useAuth } from "../../context/useAuth";
 export default function MainHeader(){
 
     const [upcomingSessionsVisible, setUpcomingSessionsVisible]= useState(false);
-    const {logout}= useAuth();
+    const {user,logout}= useAuth();
     const navigate= useNavigate();
 
     function showUpcomingSessions(){
@@ -20,7 +20,7 @@ export default function MainHeader(){
 
     const handleLogout=()=>{
       logout();
-      navigate("/");
+      navigate("/",{replace: true});
     };
 
     return(
@@ -34,28 +34,45 @@ export default function MainHeader(){
 
         <header id="main-header">
 
-         <h1>React Mentoring</h1>
+         <h1>Courses</h1>
 
          <nav>
             <ul>
-                <li>
-                    <NavLink to={"/"} className={({isActive})=>isActive ? 'active' : ''} end>Our Mission</NavLink>
-                </li>
-                <li>
-                    <NavLink to={"/sessions"} className={({isActive})=>isActive ? 'active' : ''}>Browse Sessions</NavLink>
-                </li>
-           
-                    <Button onClick={showUpcomingSessions}>Upcoming Sessions</Button>
 
-                <li>
-                    <NavLink to={"/login"} className={({isActive})=>isActive ? 'active' : ''}>Login</NavLink>
-                </li>
+              {user ? (
+                            <>
+                                <li>
+                                <NavLink to="/sessions" className={({ isActive }) => isActive ? 'active' : ''}>
+                                    Browse Sessions
+                                </NavLink>
+                                </li>
 
-                    <Button onClick={handleLogout}>Logout</Button>
+                                <Button onClick={showUpcomingSessions}>
+                                Upcoming Sessions
+                                </Button>
+
+                                <Button onClick={handleLogout}>
+                                Logout
+                                </Button>
+                            </>
+                 ) : (
+                            <>
+                                <li>
+                                <NavLink to="/" className={({ isActive }) => isActive ? 'active' : ''} end>
+                                    Our Mission
+                                </NavLink>
+                                </li>
+
+                                <li>
+                                <NavLink to="/login" className={({ isActive }) => isActive ? 'active' : ''}>
+                                    Login
+                                </NavLink>
+                                </li>
+                            </>
+                )}
             </ul>
-         </nav>
-
-        </header>
-        </>
+        </nav>
+    </header>
+    </>
     )
 }
