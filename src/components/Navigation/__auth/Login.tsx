@@ -21,7 +21,7 @@ export default function Login(){
 
       if(user){
           authLogin(user);
-          navigate("/sessions");
+          navigate("/");
       }else{
         alert("Invalid credentials");
         setUsername("");

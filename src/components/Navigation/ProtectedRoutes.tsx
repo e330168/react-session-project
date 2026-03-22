@@ -10,8 +10,6 @@ const ProtectedRoutes = ({
 }) => {
   const { user, hasPermission } = useAuth();
 
-  console.log("User: ", user);
-
   if (allowGuest && !user) {
     return <Outlet />;
   }
@@ -20,11 +18,25 @@ const ProtectedRoutes = ({
     return <Navigate to="/login" replace/>;
   }
 
-  if (permissions && !permissions.every((p) => hasPermission(p))) {
+  if (permissions && !permissions.some((p) => hasPermission(p))) {
     return <Navigate to="/unauthorized" replace/>;
   }
 
-  return <Outlet />;
+  return <Outlet/>;
 };
 
 export default ProtectedRoutes;
+
+
+
+
+
+
+
+
+
+
+
+
+    // console.log("USER:", user);
+    // console.log("PATH:", location.pathname);

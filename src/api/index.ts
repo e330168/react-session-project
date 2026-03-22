@@ -43,9 +43,22 @@ export const getSessions= async(): Promise<Session[]| null> =>{
   try {
     const response= await axios.get<Session[]>
                          (`${API_URL}/sessions`);
-        return response.data;
+    return response.data;
   } catch (error) {
     console.log("Failed to fetch session: ",error);
+    return null;
+  }
+};
+
+//Fetch Session
+export const getSessionById = async (
+  id: string
+): Promise<Session | null> => {
+  try {
+    const response = await axios.get<Session>(`${API_URL}/sessions/${id}`);
+    return response.data;
+  } catch (error) {
+    console.log("Failed to fetch session: ", error);
     return null;
   }
 };
