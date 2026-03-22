@@ -1,8 +1,11 @@
 import axios from "axios";
 import type { User } from "../context/AuthType";
-import type { Session } from "react-router-dom";
+import type { Todo } from "../store/todo/TodoType";
+import type { Session } from "../store/session/SessionsType";
 
 const API_URL="http://localhost:3001";
+
+const API_TODO="https://jsonplaceholder.typicode.com/todos";
 
 //Login User
 export const login= async(
@@ -10,11 +13,6 @@ export const login= async(
     password:string
 ): Promise<User| null> =>{
   try {
-    // const response= await axios.get<User[]>
-    //                      (`${API_URL}/users`,
-    //                        {params: {username,password}}
-    // );
-
     const response= await axios.get<User[]>
                          (`${API_URL}/users`
     );
@@ -28,13 +26,18 @@ export const login= async(
     );
 
     console.log("FOUND USER:", user);
-    // console.log(response.data.find(u => u.username === "admin"));
 
     return user || null;
   } catch (error) {
     console.log("Login failes: ",error);
     return null;
   }
+};
+
+//Fetch Todos
+const getTodos = async (): Promise<Todo[]> => {
+  const res = await axios.get<Todo[]>(`${API_TODO}`);
+  return res.data;
 };
 
 
