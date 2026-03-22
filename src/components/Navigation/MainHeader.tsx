@@ -3,11 +3,12 @@ import { NavLink, useNavigate } from "react-router-dom";
 import UpcomingSessions from "../Sessions/UpcomingSessions";
 import Button from "../UI/Button";
 import { useAuth } from "../../context/useAuth";
+import { PERMISSIONS } from "../../helpers/roles";
 
 export default function MainHeader(){
 
     const [upcomingSessionsVisible, setUpcomingSessionsVisible]= useState(false);
-    const {user,logout}= useAuth();
+    const {user,hasPermission,logout}= useAuth();
     const navigate= useNavigate();
 
     function showUpcomingSessions(){
@@ -39,17 +40,22 @@ export default function MainHeader(){
          <nav>
             <ul>
 
-              {user ? (
+              {user && user.role !== "guest" ? (
                             <>
                                 <li>
                                 <NavLink to="/sessions" className={({ isActive }) => isActive ? 'active' : ''}>
-                                    Browse Sessions
+                                Browse Sessions
                                 </NavLink>
                                 </li>
+                   
 
-                                <Button onClick={showUpcomingSessions}>
-                                Upcoming Sessions
-                                </Button>
+                                {[PERMISSIONS.EDIT_SESSION, PERMISSIONS.DELETE_SESSION].some(p =>
+                                  hasPermission(p)
+                                ) && (
+                                  <Button onClick={showUpcomingSessions}>
+                                    Upcoming Sessions
+                                  </Button>
+                                )}
 
                                 <Button onClick={handleLogout}>
                                 Logout
@@ -59,13 +65,13 @@ export default function MainHeader(){
                             <>
                                 <li>
                                 <NavLink to="/" className={({ isActive }) => isActive ? 'active' : ''} end>
-                                    Our Mission
+                                Our Mission
                                 </NavLink>
                                 </li>
 
                                 <li>
                                 <NavLink to="/login" className={({ isActive }) => isActive ? 'active' : ''}>
-                                    Login
+                                Login
                                 </NavLink>
                                 </li>
                             </>
