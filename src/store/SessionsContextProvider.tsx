@@ -24,7 +24,7 @@ function sessionsReducer(state: SessionState, action: SessionsAction) {
         }
 
         return {
-        upcomingSessions: state.upcomingSessions.concat(action.session)
+        upcomingSessions: (state.upcomingSessions as Session[]).concat(action.session)
         }
     }
 

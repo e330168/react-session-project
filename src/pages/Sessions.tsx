@@ -1,13 +1,21 @@
+import { useLoaderData} from "react-router-dom";
 import SessionsList from "../components/Sessions/SessionsList";
 import { useAuth } from "../context/useAuth";
-import {SESSIONS} from "../dummy-sessions";
+import {images} from "../helpers/images.ts";
+import type { Session } from "../store/SessionsType.ts";
 
+export type ImageKey = keyof typeof images;
 export default function Sessions(){
 
     const{user}= useAuth();
-    console.log(user);
 
-
+    const SESSIONS = useLoaderData() as Session[];
+    
+    const sessionsWithImages = SESSIONS.map((session:Session) => ({
+        ...session,
+        image: images[session.image],
+    }));
+    
     return(
         <main id="sessions-page">
             <header>
@@ -20,7 +28,7 @@ export default function Sessions(){
                         you!
                      </p>
             </header>
-                <SessionsList sessions={SESSIONS}/>
+                <SessionsList sessions={sessionsWithImages}/>
         </main>
     )
 }

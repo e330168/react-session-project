@@ -406,3 +406,12 @@ main img {
   max-width: 80rem;
   margin: 3rem auto;
 }
+
+#btn-edit{
+  background-color: rgb(123, 123, 239);
+}
+
+#btn-delete{
+  background-color: rgb(177, 71, 30);
+  color: white;
+}
