@@ -5,6 +5,9 @@ import HomePage from './pages/Home';
 import SessionsPage from './pages/Sessions';
 import SessionListPage from './pages/Session';
 import Login from './components/Navigation/__auth/Login';
+import Unauthorized from './components/Navigation/__auth/Unauthorized';
+import ProtectedRoutes from './components/Navigation/ProtectedRoutes';
+import { PERMISSIONS } from './helpers/roles';
 
 const Router= createBrowserRouter([
     {
@@ -15,9 +18,16 @@ const Router= createBrowserRouter([
             index: true,
             element: <HomePage/>
           },
-        {path:'sessions', element:<SessionsPage/>},
-        {path:'sessions/:id', element:<SessionListPage/>},
         {path:'login', element:<Login/>},
+        {path:'unauthorized', element:<Unauthorized/>},
+
+        {
+          element: <ProtectedRoutes permissions={[PERMISSIONS.VIEW_SESSIONS,PERMISSIONS.EDIT_SESSION]} />,
+            children: [
+              {path:'sessions', element:<SessionsPage/>},
+              {path:'sessions/:id', element:<SessionListPage/>},
+          ]
+        }
       ],
     }
 ]);

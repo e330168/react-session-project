@@ -166,6 +166,12 @@ ul {
   margin: 3rem auto;
 }
 
+#sessions-page h1{
+  margin: 2rem 0 0.5rem 0;
+  font-size: 1.5rem;
+  color: rgb(108, 162, 229);
+}
+
 #sessions-page h2 {
   margin: 2rem 0 0.5rem 0;
   font-size: 1.5rem;
@@ -387,4 +393,16 @@ ul {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+main img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#unauthorized-page {
+  width: 80%;
+  max-width: 80rem;
+  margin: 3rem auto;
 }
