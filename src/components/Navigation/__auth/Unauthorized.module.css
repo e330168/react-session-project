@@ -1,0 +1,20 @@
+.unauthorizedPage {
+  width: 80%;
+  max-width: 80rem;
+  margin: 3rem auto;
+  text-align: center;
+}
+
+.error {
+  color: rgb(255, 130, 130);
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+}
+
+.unauthorizedImg {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  object-fit: contain;
+  margin: 0 auto;
+}

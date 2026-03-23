@@ -6,76 +6,68 @@ import { useAuth } from "../../../context/useAuth";
 import { useNavigate } from "react-router-dom";
 import { loginTodo } from "../../../helpers/todos";
 import type { User } from "../../../context/AuthType";
+import styles from './Login.module.css';
 
-export default function Login(){
+export default function Login() {
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const { login: authLogin } = useAuth();
+  const navigate = useNavigate();
 
-const[username, setUsername]= useState<string>("");
-const[password, setPassword]= useState<string>("");
-const {login:authLogin}= useAuth();
-const navigate= useNavigate();
-
-const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     if (!username) return alert("Invalid credentials");
 
     let user: User | null = null;
-    let goToTodo = false
+    let goToTodo = false;
     const userMatch = username.toLowerCase().match(/^user(\d+)$/);
 
     if (userMatch) {
-        user = await loginTodo(username, password);
-        goToTodo=true;
+      user = await loginTodo(username, password);
+      goToTodo = true;
     } else {
-        user = await login(username, password);
+      user = await login(username, password);
     }
 
     if (user) {
-        authLogin(user);
-        if(goToTodo){
-          navigate("/todos");
-        }else{
-          navigate("/sessions");
-        }
+      authLogin(user);
+      navigate(goToTodo ? "/todos" : "/sessions");
     } else {
-        alert("Invalid credentials");
-        setUsername("");
-        setPassword("");
+      alert("Invalid credentials");
+      setUsername("");
+      setPassword("");
     }
-};
+  };
 
-    return(
-            <div className="flex flex-col items-center p-10" id="home-page">
-                <form onSubmit={handleSubmit}
-                    className="w-full max-w-sm">
+  return (
+    <div className={styles.loginPage} id="home-page">
+      <form onSubmit={handleSubmit} className={styles.loginForm}>
+        <div className={styles.formGroup}>
+          <Input
+            label="username"
+            id="username"
+            type="text"
+            value={username}
+            placeholder="Enter username"
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </div>
 
-                        <div className="md:flex md:items-center mb-6">
-                            <Input label="username"
-                                   id="username"
-                                   type="text"
-                                   value={username}
-                                   placeholder="Enter username"
-                                   onChange={(e)=>setUsername(e.target.value)}
-                                   />
-                        </div>
+        <div className={styles.formGroup}>
+          <Input
+            label="password"
+            id="password"
+            type="password"
+            value={password}
+            placeholder="Enter password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
 
-                        <div className="md:flex md:items-center mb-6">
-                            <Input label="password"
-                                   id="password"
-                                   type="password"
-                                   value={password}
-                                   placeholder="Enter password"
-                                   onChange={(e)=>setPassword(e.target.value)}
-                                   />
-                        </div>
-
-
-                        <div>
-                            <Button type="submit">Login</Button>
-                        </div>
-
-                 </form>
-            </div>
-        
-    )
+        <div className={styles.buttonWrapper}>
+          <Button type="submit">Login</Button>
+        </div>
+      </form>
+    </div>
+  );
 }
