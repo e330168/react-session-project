@@ -1,73 +1,58 @@
-# React + TypeScript + Vite
+Dynamic user creation from todos: user1–user10 with default password 123456.
+Local JSON database (db.json) defines additional users with roles: admin, manager, user, guest, each with the default password 123456.
+Login system authenticates users from either generated users or db.json.
+Role-based access control and secure routing:
+  Admin (id=1) can view all todos and dashboards.
+  Other users see only their own todos or pages according to their permissions.
+Todo dashboard displays total todos and the first/last todo IDs.
+Mock backend: Run a local JSON server to serve db.json:
+  json-server --watch db.json --port 3001
+Demonstrates authentication, permissions, conditional UI, and protected routes using a local JSON server.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+Todos Data
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+The app also uses todos from the JSON API:
 
-## React Compiler
+Each todo has:
+- userId -> which user it belongs to
+- id -> unique todo ID
+- title -> task description
+- completed -> status (true/false)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Todos are filtered by user:
+- Admin (id=1) can see all todos
+- Other users see only their own todos
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Local JSON database (db.json)
+The app uses a local db.json file as a mock backend:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+1. Users: stores id, username, password, role, and permissions.
+2. Sessions: stores id, title, summary, description, duration, date, image, and price.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+1. Users – defines users, roles, and permissions:
+- Admin (id=1) -> view_dashboard, view_sessions, edit_session, delete_session
+- Manager (id=2) -> view_dashboard, view_sessions, edit_session
+- User (id=3) -> view_todos, view_dashboard, view_sessions
+- Guest (id=4) -> view_dashboard
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. Sessions – contains session details:
+- id: unique session ID (e.g., sess01)
+- title: session title
+- summary: short description
+- description: full content
+- duration: in hours
+- date: session date
+- image: image reference
+- price: session cost
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Session Actions
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Users can perform the following actions based on their permissions:
+
+- Book a session – create a new session
+- Filter sessions – by date, month, or whether they are expired/upcoming
+- Search sessions – using a search bar
+- Delete a session – if they have delete_session permission
