@@ -29,7 +29,6 @@
             "password":"123456",
             "role":"user",
             "permissions":[
-                "view_todos",
                 "view_dashboard",
                 "view_sessions"
             ]

@@ -17,15 +17,11 @@ export const login= async(
                          (`${API_URL}/users`
     );
 
-    console.log("ALL USERS:", response.data);
-
     const user = response.data.find(
       (u) =>
         u.username === username &&
         u.password === password
     );
-
-    console.log("FOUND USER:", user);
 
     return user || null;
   } catch (error) {
@@ -35,10 +31,15 @@ export const login= async(
 };
 
 //Fetch Todos
-const getTodos = async (): Promise<Todo[]> => {
-  const res = await axios.get<Todo[]>(`${API_TODO}`);
-  return res.data;
-};
+export const getTodos = async (): Promise<Todo[]| null> => {
+  try {
+    const response = await axios.get<Todo[]>(`${API_TODO}`);
+    return response.data;
+    }catch (error) {
+        console.log("Failed to fetch todos: ",error);
+        return null;
+    }
+  };
 
 
 //Fetch Sessions
@@ -53,7 +54,8 @@ export const getSessions= async(): Promise<Session[]| null> =>{
   }
 };
 
-//Fetch Session
+
+//Fetch Session By Id
 export const getSessionById = async (
   id: string
 ): Promise<Session | null> => {
@@ -73,7 +75,6 @@ export const deleteSessions= async(
 ): Promise<void> =>{
   try {
     await axios.delete(`${API_URL}/sessions/${id}`);
-
   } catch (error) {
     console.log("Failed to delete session: ",error);
   }
