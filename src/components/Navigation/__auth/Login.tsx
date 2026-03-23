@@ -4,31 +4,45 @@ import Button from "../../UI/Button";
 import { login } from "../../../api";
 import { useAuth } from "../../../context/useAuth";
 import { useNavigate } from "react-router-dom";
+import { loginTodo } from "../../../helpers/todos";
+import type { User } from "../../../context/AuthType";
 
 export default function Login(){
 
-    const[username, setUsername]= useState<string>("");
-    const[password, setPassword]= useState<string>("");
-    const {login:authLogin}= useAuth();
-    const navigate= useNavigate();
+const[username, setUsername]= useState<string>("");
+const[password, setPassword]= useState<string>("");
+const {login:authLogin}= useAuth();
+const navigate= useNavigate();
 
-    const handleSubmit= async(e:React.FormEvent)=>{
-      e.preventDefault();
+const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-      if(!username) return alert("Invalid credentials");
-      
-      const user= await login(username,password);
+    if (!username) return alert("Invalid credentials");
 
-      if(user){
-          authLogin(user);
-          navigate("/");
-      }else{
+    let user: User | null = null;
+    let goToTodo = false
+    const userMatch = username.toLowerCase().match(/^user(\d+)$/);
+
+    if (userMatch) {
+        user = await loginTodo(username, password);
+        goToTodo=true;
+    } else {
+        user = await login(username, password);
+    }
+
+    if (user) {
+        authLogin(user);
+        if(goToTodo){
+          navigate("/todos");
+        }else{
+          navigate("/sessions");
+        }
+    } else {
         alert("Invalid credentials");
         setUsername("");
         setPassword("");
-      }
-
-    };
+    }
+};
 
     return(
             <div className="flex flex-col items-center p-10" id="home-page">
@@ -57,9 +71,7 @@ export default function Login(){
 
 
                         <div>
-                            <Button type="submit">
-                                Login
-                            </Button>
+                            <Button type="submit">Login</Button>
                         </div>
 
                  </form>

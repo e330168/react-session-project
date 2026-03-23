@@ -42,6 +42,15 @@ export default function MainHeader(){
 
               {user && user.role !== "guest" ? (
                             <>
+
+                              {/* {user.permissions.includes("view_todos") && ( */}
+                                <li>
+                                <NavLink to="/todos" className={({ isActive }) => isActive ? 'active' : ''}>
+                                Todos
+                                </NavLink>
+                                </li>
+                              {/* )} */}
+
                                 <li>
                                 <NavLink to="/sessions" className={({ isActive }) => isActive ? 'active' : ''}>
                                 Browse Sessions
