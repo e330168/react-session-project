@@ -24,13 +24,18 @@ const diffDays = getDaysDistance(session.date);
 
         <h3>{session.title}</h3>
         <p>{session.summary}</p>
-        <time dateTime={new Date(session.date).toISOString()}>
-          {new Date(session.date).toLocaleDateString('en-US', {
-            day: 'numeric',
-            month: 'short',
-            year: 'numeric',
-          })}
-        </time>
+        
+        {session.date ? (
+          <time dateTime={new Date(session.date).toISOString()}>
+            {new Date(session.date).toLocaleDateString("en-US", {
+              day: "numeric",
+              month: "short",
+              year: "numeric",
+            })}
+          </time>
+        ) : (
+          <span>Date not available</span>
+        )}
 
         <p>
           {diffDays > 0
