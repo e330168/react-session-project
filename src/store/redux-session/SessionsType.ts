@@ -1,4 +1,4 @@
-export type ImageKey = string;
+import type { ImageKey } from "../../pages/Sessions";
 
 export type Session = {
   id: string;

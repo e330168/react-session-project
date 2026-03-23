@@ -7,7 +7,7 @@ import { useAuth } from "../context/useAuth.ts";
 import { PERMISSIONS } from "../helpers/roles.ts";
 import { deleteSessions } from "../api/index.ts";
 import {images} from "../helpers/images.ts";
-import type { Session } from "../store/session/SessionsType.ts";
+import type { Session } from "../store/redux-session/SessionsType";
 
 export default function Session(){
    

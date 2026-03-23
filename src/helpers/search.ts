@@ -1,7 +1,7 @@
-import type { Session } from "../store/SessionsType";
+import type { Session } from "../store/redux-session/SessionsType";
 
 export function searchSessions(sessions: Session[], query: string) {
-  if(query.length==0 || !query.trim()){
+  if(!query.trim()){
     return sessions;
   }
 

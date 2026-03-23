@@ -1,7 +1,7 @@
 import axios from "axios";
 import type { User } from "../context/AuthType";
 import type { Todo } from "../store/todo/TodoType";
-import type { Session } from "../store/session/SessionsType";
+import type { Session } from "../store/redux-session/SessionsType";
 
 const API_URL="http://localhost:3001";
 
@@ -13,9 +13,7 @@ export const login= async(
     password:string
 ): Promise<User| null> =>{
   try {
-    const response= await axios.get<User[]>
-                         (`${API_URL}/users`
-    );
+    const response= await axios.get<User[]>(`${API_URL}/users`);
 
     const user = response.data.find(
       (u) =>
