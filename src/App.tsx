@@ -8,7 +8,8 @@ import Login from './components/Navigation/__auth/Login';
 import Unauthorized from './components/Navigation/__auth/Unauthorized';
 import ProtectedRoutes from './components/Navigation/ProtectedRoutes';
 import { PERMISSIONS } from './helpers/roles';
-import { getSessionById, getSessions } from './api';
+import { getSessionById, getSessions,getTodos } from './api';
+import Todos from './pages/Todos';
 
 const Router= createBrowserRouter([
     {
@@ -21,6 +22,13 @@ const Router= createBrowserRouter([
           },
         {path:'login', element:<Login/>},
         {path:'unauthorized', element:<Unauthorized/>},
+
+        {
+          element: <ProtectedRoutes permissions={[PERMISSIONS.VIEW_TODOS]}/>,
+            children: [
+              {path:'todos', element:<Todos/>,loader: () => getTodos()},
+          ]
+        },
 
         {
           element: <ProtectedRoutes permissions={[PERMISSIONS.VIEW_SESSIONS]}/>,

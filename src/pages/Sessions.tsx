@@ -27,6 +27,7 @@ export default function Sessions(){
                         deep dive into state mechanics - we got just the right session for
                         you!
                      </p>
+                 <br/>
             </header>
                 <SessionsList sessions={sessionsWithImages}/>
         </main>

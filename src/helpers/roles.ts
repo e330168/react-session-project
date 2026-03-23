@@ -7,6 +7,7 @@ export const ROLES={
 
 export const PERMISSIONS={
     VIEW_DASHBOARD: "view_dashboard",
+    VIEW_TODOS: "view_todos",
     VIEW_SESSIONS: "view_sessions",
     EDIT_SESSION: "edit_session",
     DELETE_SESSION: "delete_session"
@@ -14,6 +15,7 @@ export const PERMISSIONS={
 
 export const ROLES_PERMISSIONS: Record<string,string[]> = {
     [ROLES.ADMIN]: [
+        PERMISSIONS.VIEW_TODOS,
         PERMISSIONS.VIEW_DASHBOARD,
         PERMISSIONS.VIEW_SESSIONS,
         PERMISSIONS.EDIT_SESSION,
