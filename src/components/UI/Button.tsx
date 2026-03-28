@@ -1,5 +1,6 @@
 import type { ComponentPropsWithoutRef, ReactNode} from "react";
 import { Link, type LinkProps } from 'react-router-dom';
+import styles from "./Button.module.css";
 
 type BaseProps={
   children:ReactNode;
@@ -27,7 +28,7 @@ export default function Button(props: ButtonProps | ButtonLinkProps){
 
     return(
        <Link 
-       className={`button ${textOnly? "button--text-only" : ""}`}
+       className={`button ${textOnly? "buttonTextOnly" : ""}`}
        {...otherProps}
        >
         {children}
@@ -36,15 +37,11 @@ export default function Button(props: ButtonProps | ButtonLinkProps){
    }
 
     const {children, textOnly, ...otherProps}= props;
+    const btnClass = textOnly ? `${styles.button} ${styles["buttonTextOnly"]}`: styles.button;
+    
     return(
-        
-       <button 
-       className={`button ${textOnly? "button--text-only" : ""}`}
-       {...otherProps}
-       >
+        <button className={btnClass} {...otherProps}>
         {children}
        </button>
     );
-
-    
 }

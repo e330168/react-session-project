@@ -8,6 +8,8 @@ import { PERMISSIONS } from "../helpers/roles.ts";
 import { deleteSessions } from "../api/index.ts";
 import {images} from "../helpers/images.ts";
 import type { Session } from "../store/redux-session/SessionsType";
+import styles from "./Session.module.css";
+
 
 export default function Session(){
    
@@ -51,23 +53,26 @@ export default function Session(){
         }
       }
       
-    const diffDays = getDaysDistance(loadedSession.date);
+    const diffDays = loadedSession?.date ? getDaysDistance(loadedSession.date) : 0;
+    console.log(diffDays)
+
+    // const btnClass = diffDays < 0 ? styles.buttonDisabled: styles.button;
 
     return (
-        <main id="session-page">
-
-        {isBooking && 
+    <main className={styles.sessionPage}>
+      {isBooking && 
            <BookSession session={loadedSession} onDone={handleStopBooking}/>
         }
 
-         <article>
-          <header>
-              <img  
-                 src={images[loadedSession.image]}
-                 alt={loadedSession.description}
-               />
+       <article className={styles.article}>
+         <header className={styles.header}>
+           <img
+             className={styles.image}
+             src={images[loadedSession.image]}
+             alt={loadedSession.description}/>
 
-               <div>
+           <div className={styles.details}>
+              <div>
                   <h2>{loadedSession.title}</h2>
                   <time dateTime={new Date(loadedSession.date).toISOString()}>
                           {new Date(loadedSession.date).toLocaleDateString('en-US', {
@@ -77,44 +82,58 @@ export default function Session(){
                         })}
                   </time>
 
-                  <div className="text-h3">
-                    {diffDays > 0
-                      ? `Happening in ${diffDays} day(s)`
-                      : diffDays < 0
-                      ? `Happened ${Math.abs(diffDays)} day(s) ago`
-                      : 'Happening today!'}
-                  </div>
-                  {diffDays < 0 && <p className="error">This session has already passed.</p>}
+             <p className={styles.status}>
+               {diffDays > 0
+                 ? `Happening in ${diffDays} day(s)`
+                 : diffDays < 0
+                 ? `Happened ${Math.abs(diffDays)} day(s) ago`
+                 : "Happening today!"}
+             </p>
+             {diffDays < 0 && (
+               <p className={styles.error}>This session has already passed.</p>
+             )}
 
-                  <h2>Price: ${loadedSession.price}</h2>
+                <h2>Price: ${loadedSession.price}</h2>
 
-                  <p>
-                    <Button onClick={handleStartBooking}
-                            disabled={diffDays < 0}
-                            className={`button ${diffDays < 0 ? 'button--disabled' : ''}`}
-                            >Book Session
+
+                <p>
+                {diffDays>0 && 
+                  (
+                    <Button
+                      onClick={handleStartBooking}
+                      disabled={diffDays < 0}
+                    >
+                      {/* className={btnClass} */}
+                      Book Session
                     </Button>
-                  </p>
+                  )
+                }
+                </p>
 
+                <div className={styles.actions}>
                   <p>
                     {hasPermission(PERMISSIONS.DELETE_SESSION)&&(
-                    <Button id="btn-delete"
+                    <Button className={styles.btnDelete}
                             onClick={handleDeleteSession} 
                             >Delete
                     </Button>
                     )}
 
-                    <Button id="btn-edit"
+                    <Button className={styles.btnEdit}
                             onClick={()=>alert(`Edit: ${loadedSession.description}`)} 
                             >Edit
                     </Button>
                   
                   </p>
+                </div>
 
-               </div>
-          </header>
-          <p id="content">{loadedSession.description}</p>
+                </div>
+                </div>
+
+                <p className={styles.content}>{loadedSession.description}</p>
+
+           </header>
          </article>
-        </main>
+     </main>
     )
 }

@@ -1,0 +1,69 @@
+.sessionItem {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+}
+
+.image {
+  width: 100%;
+  height: 12rem;
+  object-fit: cover;
+}
+
+.sessionData {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.title {
+  margin: 0 0 0.25rem 0;
+  color: #c7b0ee;
+  font-size: 1rem;
+}
+
+.summary {
+  margin: 0 0 0.25rem 0;
+  color: #eae3f6;
+  font-size: 0.9rem;
+}
+
+.actions {
+  margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+  .sessionItem {
+    flex-direction: column;
+  }
+
+  .image {
+    height: 10rem;
+  }
+
+  .title {
+    font-size: 0.9rem;
+  }
+
+  .summary {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .image {
+    height: 8rem;
+  }
+
+  .title {
+    font-size: 0.8rem;
+  }
+
+  .summary {
+    font-size: 0.75rem;
+  }
+}

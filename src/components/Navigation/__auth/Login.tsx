@@ -40,7 +40,7 @@ export default function Login() {
   };
 
   return (
-    <div className={styles.loginPage} id="home-page">
+    <div className={styles.loginPage}>
       <form onSubmit={handleSubmit} className={styles.loginForm}>
         <div className={styles.formGroup}>
           <Input

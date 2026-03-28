@@ -8,6 +8,8 @@
 .loginForm {
   width: 100%;
   max-width: 24rem;
+  border-color: rgb(2, 78, 52);
+  box-shadow: inset;
 }
 
 .formGroup {

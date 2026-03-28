@@ -1,15 +1,16 @@
 import studentsImg from '../assets/students.jpg';
 import listImg from '../assets/list.jpg';
 import certificateImg from '../assets/certificate.jpg';
+import styles from "./Home.module.css";
 
 export default function Home(){
     return(
-        <main id="home-page">
+        <main className={styles.homePage}>
         
         <h2>Our mission: Your success</h2>
 
-        <section>
-        <img src={studentsImg} alt="A group of students" />
+       <section className={styles.section}>
+        <img src={studentsImg} className={styles.image} alt="A group of students" />
         <div>
           <h3>What we do</h3>
           <p>
@@ -21,8 +22,8 @@ export default function Home(){
         </div>
       </section>
 
-        <section>
-        <img src={listImg} alt="A list of sessions" />
+  <section className={`${styles.section} ${styles.reverse}`}>
+        <img src={listImg} className={styles.image} alt="A list of sessions" />
         <div>
           <h3>What we offer</h3>
           <p>
@@ -33,8 +34,8 @@ export default function Home(){
         </div>
       </section>
 
-      <section>
-        <img src={certificateImg} alt="A certificate" />
+      <section className={styles.section}>
+        <img src={certificateImg} className={styles.image} alt="A certificate" />
         <div>
           <h3>What you get</h3>
           <p>

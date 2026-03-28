@@ -1,4 +1,5 @@
-import searchI from "../../assets/searchI.png"
+import searchI from "../../assets/searchI.png";
+import styles from './SearchBar.module.css';
 
 type SearchBarProps = {
   onClick: () => void;
@@ -12,7 +13,7 @@ export default function SearchBar({onClick, query,setQuery}: SearchBarProps) {
       <>
           <input
               type="text"
-              className="item"
+              className={styles.item}
               value={query}
               onChange={(e) => {
               setQuery(e.target.value);
@@ -28,7 +29,7 @@ export default function SearchBar({onClick, query,setQuery}: SearchBarProps) {
             >
           */}
         
-            <img id="searchI"
+            <img className={styles.searchI}
               src={searchI}
               alt="search"/>
           </button>

@@ -54,6 +54,6 @@ export default function UpcomingSessions({onClose}:UpcomingSessionsProps){
         <Button onClick={onClose}>Close</Button>
       </p>
 
-        </Modal>
+      </Modal>
     )
 }

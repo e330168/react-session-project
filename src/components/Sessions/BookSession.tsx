@@ -3,6 +3,7 @@ import type { ModalHandle } from "../UI/Modal";
 import Modal from "../UI/Modal";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
+import styles from './BookSession.module.css';
 
 import { useDispatch } from "react-redux";
 import type { AppDispatch } from "../../store/redux-session/store";
@@ -77,12 +78,12 @@ export default function BookSession({session,onDone}: BookSessionProps){
             <form onSubmit={handleSubmit}>
               
                 <Input label="Your name" id="name" name="name" type="text"/>
-                {errors.name && <p className="error">{errors.name}</p>}
+                {errors.name && <p className={styles.error}>{errors.name}</p>}
 
                 <Input label="Your email" id="email" name="email" type="email"/>
-                {errors.email && <p className="error">{errors.email}</p>}
+                {errors.email && <p className={styles.error}>{errors.email}</p>}
 
-                 <p className="actions">
+                 <p className={styles.actions}>
                       <Button type="button" textOnly onClick={onDone}>
                         Cancel
                       </Button>

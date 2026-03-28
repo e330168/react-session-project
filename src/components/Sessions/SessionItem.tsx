@@ -1,4 +1,5 @@
 import Button from "../UI/Button";
+import styles from "./SessionItem.module.css";
 
 type SessionItemProps={
     id: string;
@@ -17,18 +18,18 @@ export default function SessionItem({
     id
 }:SessionItemProps){
     return (
-        <article className="session-item">
+        <article className={styles.sessionItem}>
 
-            <img src={image} alt={summary}/>
+            <img src={image} alt={summary} className={styles.imgage}/>
 
-            <div className="sessio-data">
+            <div className={styles.sessionData}>
                 <div>
                     <div>
-                       <h3>{title}</h3>
-                       <p>{summary}</p>
+                       <h3 className={styles.title}>{title}</h3>
+                       <p className={styles.summary}>{summary}</p>
                     </div>
 
-                    <p className="actions">
+                    <p className={styles.actions}>
                       <Button to={id}>Learn More</Button>
                     </p>
                 </div>

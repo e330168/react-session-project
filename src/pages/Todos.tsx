@@ -3,6 +3,7 @@ import type { Todo } from "../store/todo/TodoType";
 import TodosList from "../components/Todos/TodosList";
 import { useAuth } from "../context/useAuth";
 import { getTodosForUser, getUsers } from "../helpers/todos";
+import styles from "./Todos.module.css";
 
 export default function Todos(){
 
@@ -28,10 +29,10 @@ export default function Todos(){
 
     
     return(
-        <main id="sessions-page">
+       <main className={styles.todosPage}>
             <header>
-                <h1>Welcome back, {user?.username.toUpperCase()} !</h1>
-                <h2>Role: {user?.role}</h2>
+                <h4 className={styles.title}> Welcome back, {user?.username.toUpperCase()} !</h4>
+                <h5 className={styles.title}>Role: {user?.role}</h5>
                     <p>
                     You can view {totalTodos} todos (IDs:  {firstId} - {lastId})
                     </p>

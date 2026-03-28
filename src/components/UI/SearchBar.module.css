@@ -1,0 +1,10 @@
+.searchI{
+  width: 1em;
+  height: 1em;
+  object-fit: contain;
+}
+
+.item {
+  margin-left: auto;
+  border-radius: 0.375rem;
+}

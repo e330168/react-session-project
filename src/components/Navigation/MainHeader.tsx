@@ -4,6 +4,7 @@ import UpcomingSessions from "../Sessions/UpcomingSessions";
 import Button from "../UI/Button";
 import { useAuth } from "../../context/useAuth";
 import { PERMISSIONS } from "../../helpers/roles";
+import styles from "./MainHeader.module.css";
 
 export default function MainHeader(){
 
@@ -24,6 +25,12 @@ export default function MainHeader(){
       navigate("/",{replace: true});
     };
 
+    const [menuOpen, setMenuOpen] = useState(false);
+
+    function toggleMenu() {
+      setMenuOpen(prev => !prev);
+    }
+
     return(
         <>
 
@@ -33,12 +40,15 @@ export default function MainHeader(){
            )
          }
 
-        <header id="main-header">
+        <header className={styles.mainHeader}>
+          <h1 className={styles.h1}>Courses</h1>
 
-         <h1>Courses</h1>
+          <button className={styles.menuBtn} onClick={toggleMenu}>
+            ☰
+          </button>
 
-         <nav>
-            <ul>
+        <nav className={`${styles.nav} ${menuOpen ? styles.open : ""}`}>
+          <ul>
 
               {user && user.role !== "guest" ? (
                             <>
@@ -83,7 +93,7 @@ export default function MainHeader(){
                                 Login
                                 </NavLink>
                                 </li>
-                            </>
+                    </>
                 )}
             </ul>
         </nav>
