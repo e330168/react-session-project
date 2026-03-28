@@ -1,4 +1,4 @@
-import { getTodos } from "../api";
+import { getTodos } from '../store/todo/todoApi';
 import type { User } from "../context/AuthType";
 import type { Todo } from "../store/todo/TodoType";
 

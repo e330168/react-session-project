@@ -8,8 +8,10 @@ import Login from './components/Navigation/__auth/Login';
 import Unauthorized from './components/Navigation/__auth/Unauthorized';
 import ProtectedRoutes from './components/Navigation/ProtectedRoutes';
 import { PERMISSIONS } from './helpers/roles';
-import { getSessionById, getSessions,getTodos } from './api';
 import Todos from './pages/Todos';
+import { sessionsLoader } from './store/redux-session/sessionsApi';
+import { getSessionById } from  './store/redux-session/sessionsApi';
+import { todosLoader } from './store/todo/todoApi';
 
 const Router= createBrowserRouter([
     {
@@ -25,23 +27,35 @@ const Router= createBrowserRouter([
 
         {
           element: <ProtectedRoutes permissions={[PERMISSIONS.VIEW_TODOS]}/>,
-            children: [
-              {path:'todos', element:<Todos/>,loader: () => getTodos()},
-          ]
+          children: [
+            {
+              path: "todos",
+              element: <Todos/>,
+              loader: todosLoader,
+            },
+          ],
         },
 
         {
           element: <ProtectedRoutes permissions={[PERMISSIONS.VIEW_SESSIONS]}/>,
-            children: [
-              {path:'sessions', element:<SessionsPage/>,loader: () => getSessions()},
-          ]
+          children: [
+            {
+              path: "sessions",
+              element: <SessionsPage/>,
+              loader: sessionsLoader,
+            },
+          ],
         },
 
         {
           element: <ProtectedRoutes permissions={[PERMISSIONS.EDIT_SESSION,PERMISSIONS.DELETE_SESSION]}/>,
-            children: [
-              {path:'sessions/:id', element:<SessionListPage/>,loader: ({params}) => getSessionById(params.id!)},
-          ]
+          children: [
+          {
+            path: "sessions/:id",
+            element: <SessionListPage />,
+            loader: getSessionById,
+          },
+        ],
         },
         
       ],

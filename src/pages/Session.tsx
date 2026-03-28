@@ -5,7 +5,7 @@ import BookSession from "../components/Sessions/BookSession";
 import { getDaysDistance } from "../helpers/date";
 import { useAuth } from "../context/useAuth.ts";
 import { PERMISSIONS } from "../helpers/roles.ts";
-import { deleteSessions } from "../api/index.ts";
+import { deleteSessionById, useDeleteSessionByIdMutation } from "../store/redux-session/sessionsApi.ts";
 import {images} from "../helpers/images.ts";
 import type { Session } from "../store/redux-session/SessionsType";
 import styles from "./Session.module.css";
@@ -18,12 +18,13 @@ export default function Session(){
   // const loadedSession= SESSIONS.find((session)=> session.id ===sessionId);
   
   const loadedSession = useLoaderData() as Session;
-  console.log(loadedSession);
+  // console.log(loadedSession);
 
   const {hasPermission}= useAuth();
   const navigate= useNavigate();
 
   const[isBooking, setIsBooking]= useState(false);
+  const [deleteSession] = useDeleteSessionByIdMutation();
     
     if(!loadedSession){
       return (
@@ -47,9 +48,14 @@ export default function Session(){
            return;
         }
 
-        if(window.confirm("Are you sure you want to delete this product?")){
-          await deleteSessions(loadedSession.id);
-          navigate("/sessions");
+      if (window.confirm("Are you sure you want to delete this session?")) {
+          try {
+            await deleteSession(loadedSession.id).unwrap();
+            navigate("/sessions");
+          } catch (err) {
+            console.error("Failed to delete session:", err);
+            alert("Could not delete session. Please try again.");
+          }
         }
       }
       

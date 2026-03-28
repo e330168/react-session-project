@@ -1,47 +1,68 @@
 import { useState } from "react";
 import Input from "../../UI/Input";
 import Button from "../../UI/Button";
-import { login } from "../../../api";
 import { useAuth } from "../../../context/useAuth";
 import { useNavigate } from "react-router-dom";
 import { loginTodo } from "../../../helpers/todos";
 import type { User } from "../../../context/AuthType";
-import styles from './Login.module.css';
+import { useLazyLoginQuery } from "../../../store/auth/authApi";
+import styles from "./Login.module.css";
 
 export default function Login() {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+
   const { login: authLogin } = useAuth();
   const navigate = useNavigate();
 
+  const [triggerLogin, { isLoading }] = useLazyLoginQuery();
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!username) return alert("Invalid credentials");
+
+    if (!username || !password) {
+      alert("Invalid credentials");
+      return;
+    }
 
     let user: User | null = null;
     let goToTodo = false;
+
     const userMatch = username.toLowerCase().match(/^user(\d+)$/);
 
-    if (userMatch) {
-      user = await loginTodo(username, password);
-      goToTodo = true;
-    } else {
-      user = await login(username, password);
-    }
+    try {
+      if (userMatch) {
+        user = await loginTodo(username, password);
+        goToTodo = true;
+      } else {
+        const users = await triggerLogin().unwrap();
 
-    if (user) {
-      authLogin(user);
-      navigate(goToTodo ? "/todos" : "/sessions");
-    } else {
-      alert("Invalid credentials");
-      setUsername("");
-      setPassword("");
+        user =
+          users.find(
+            (u) =>
+              u.username === username &&
+              u.password === password
+          ) || null;
+      }
+
+      if (user) {
+        authLogin(user);
+        navigate(goToTodo ? "/todos" : "/sessions");
+      } else {
+        alert("Invalid credentials");
+        setUsername("");
+        setPassword("");
+      }
+    } catch (error) {
+      console.error("Login failed:", error);
+      alert("Something went wrong");
     }
   };
 
   return (
     <div className={styles.loginPage}>
       <form onSubmit={handleSubmit} className={styles.loginForm}>
+        
         <div className={styles.formGroup}>
           <Input
             label="username"
@@ -65,8 +86,11 @@ export default function Login() {
         </div>
 
         <div className={styles.buttonWrapper}>
-          <Button type="submit">Login</Button>
+          <Button type="submit" disabled={isLoading}>
+            {isLoading ? "Logging in..." : "Login"}
+          </Button>
         </div>
+
       </form>
     </div>
   );
