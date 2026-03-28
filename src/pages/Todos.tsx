@@ -21,7 +21,7 @@ export default function Todos(){
         : getTodosForUser(todosData, user.id);
 
     console.log(userTodos, 'userTodos');
-    console.log(Number(user?.id), 'user.id');
+    // console.log(Number(user?.id), 'user.id');
 
     const totalTodos = userTodos.length;
     const firstId = userTodos[0]?.id;
@@ -32,7 +32,7 @@ export default function Todos(){
        <main className={styles.todosPage}>
             <header>
                 <h4 className={styles.title}> Welcome back, {user?.username.toUpperCase()} !</h4>
-                <h5 className={styles.title}>Role: {user?.role}</h5>
+                <h4>Role: {user?.role}</h4>
                     <p>
                     You can view {totalTodos} todos (IDs:  {firstId} - {lastId})
                     </p>

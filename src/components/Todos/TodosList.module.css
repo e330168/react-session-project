@@ -1,7 +1,8 @@
 .todosGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 16px;
+  padding: 10px;
 }
 
 .todoItem {
@@ -10,7 +11,7 @@
   padding: 16px;
   background-color: #fff;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .todoItem.completed {
@@ -21,6 +22,17 @@
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+.todoHeader input[type="checkbox"] {
+  flex: 0 0 3%;
+  width: 100%;
+}
+
+.todoHeader h3 {
+  flex: 1;
+  margin: 0;
+  word-break: break-word;
 }
 
 .todoTitle {
@@ -34,4 +46,38 @@
 .todoStatus {
   margin-top: 10px;
   color: #555;
+  font-size: 14px;
+}
+
+@media (max-width: 900px) {
+  .todosGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .todoItem {
+    padding: 14px;
+  }
+}
+
+@media (max-width: 600px) {
+  .todosGrid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .todoItem {
+    padding: 12px;
+  }
+
+  .todoHeader input[type="checkbox"] {
+    flex: 0 0 8%;
+  }
+
+  .todoHeader h3 {
+    font-size: 16px;
+  }
+
+  .todoStatus {
+    font-size: 13px;
+  }
 }

@@ -37,8 +37,6 @@ export default function BookSession({session,onDone}: BookSessionProps){
       const formData= new FormData(event.currentTarget);
       const data=Object.fromEntries(formData);
 
-      console.log(data);
-
     const name = data.name as string;
     const email = data.email as string;
 

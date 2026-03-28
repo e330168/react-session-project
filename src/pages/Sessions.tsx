@@ -22,7 +22,7 @@ export default function Sessions(){
             <header>
                 <h1 className={styles.title}> Welcome back, {user?.username.toUpperCase()} !</h1>
                 <h2 className={styles.title}>Role: {user?.role}</h2>
-                <h2>Available mentoring sessions</h2>
+                <h4>Available mentoring sessions</h4>
                      <p>
                         From an one-on-one introduction to React's basics all the way up to a
                         deep dive into state mechanics - we got just the right session for
