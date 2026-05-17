@@ -11,7 +11,7 @@ import { PERMISSIONS } from './helpers/roles';
 import Todos from './pages/Todos';
 import { sessionsLoader } from './store/redux-session/sessionsApi';
 import { getSessionById } from  './store/redux-session/sessionsApi';
-import { todosLoader } from './store/todo/todoApi';
+import { getTodos } from './store/todo/todoApi';
 
 const Router= createBrowserRouter([
     {
@@ -31,7 +31,7 @@ const Router= createBrowserRouter([
             {
               path: "todos",
               element: <Todos/>,
-              loader: todosLoader,
+              loader: getTodos,
             },
           ],
         },
